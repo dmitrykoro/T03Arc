@@ -2,7 +2,13 @@ import java.awt.event.KeyEvent;
 
 public class Plank {
 
-    private int x = 400, speed = 8;
+   /* private int WINDOW_WIDTH = 1024;
+    private int WINDOW_HEIGHT = 600;
+    private int PLANK_SPEED = 8;
+    private int PLANK_WIDTH = 50;
+    private int PLANK_HEIGHT = 5;*/
+
+    private int x = Constants.WINDOW_WIDTH() / 2 - Constants.PLANK_WIDTH();
 
     enum Direction {LEFT, RIGHT, NONE}
 
@@ -11,10 +17,14 @@ public class Plank {
     public void move() {
         switch(plankDirection) {
             case LEFT:
-                x -= speed;
+                if (x >= Constants.LEFT_OVERLAY() + 3) {
+                    x -= Constants.PLANK_SPEED();
+                }
                 break;
             case RIGHT:
-                x += speed;
+                if (x + Constants.PLANK_WIDTH() + 6  <= Constants.RIGHT_OVERLAY()) {
+                    x += Constants.PLANK_SPEED();
+                }
                 break;
             case NONE:
                 break;
@@ -45,6 +55,6 @@ public class Plank {
     }
 
     public int getSpeed() {
-        return speed;
+        return Constants.PLANK_SPEED();
     }
 }

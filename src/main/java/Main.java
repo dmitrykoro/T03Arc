@@ -15,6 +15,8 @@ public class Main extends JPanel implements ActionListener{
 
     Plank plank = new Plank();
 
+    Ball ball = new Ball();
+
     public Main(JFrame frame) {
         timer.start();
         frame.addKeyListener(new KeyAdapter() {
@@ -35,11 +37,17 @@ public class Main extends JPanel implements ActionListener{
     public void paint(Graphics g) {
         g.drawImage(img, 0,0, frame.getWidth(), frame.getHeight(), null);
         g.setColor(Color.WHITE);
-        g.fillRect(plank.getX(), 500, 50, 5);
+        g.drawLine(20, 20, Constants.WINDOW_WIDTH() - 35, 20);
+        g.drawLine(Constants.WINDOW_WIDTH() - 35, 20, Constants.WINDOW_WIDTH() - 35, Constants.WINDOW_HEIGHT() - 55);
+        g.drawLine(Constants.WINDOW_WIDTH() - 35, Constants.WINDOW_HEIGHT() - 55, 20, Constants.WINDOW_HEIGHT() - 55);
+        g.drawLine(20, Constants.WINDOW_HEIGHT() - 55, 20, 20);
+        g.fillRect(plank.getX(), frame.getHeight() - 100, Constants.PLANK_WIDTH(), Constants.PLANK_HEIGHT());
+        g.fillOval(ball.getX(), ball.getY(), Constants.BALL_RADIUS(), Constants.BALL_RADIUS());
     }
 
     public void actionPerformed(ActionEvent e) {
         repaint();
         plank.move();
+        ball.move(plank);
     }
 }
