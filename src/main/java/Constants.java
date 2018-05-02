@@ -4,11 +4,11 @@ public class Constants {
 
     private static int WINDOW_WIDTH = 1024;
     private static int WINDOW_HEIGHT = 600;
-    private static int PLANK_SPEED = 8;
-    private static int PLANK_WIDTH = 50;
+    private static int PLANK_SPEED = 13;
+    private static int PLANK_WIDTH = 100;
     private static int PLANK_HEIGHT = 5;
     private static int BALL_RADIUS = 20;
-    private static int BALL_SPEED = 3;
+    private static int BALL_SPEED = 6;
     private static int RIGHT_OVERLAY = WINDOW_WIDTH - 35;
     private static int LEFT_OVERLAY = 20;
     private static int UPPER_OVERLAY = 20;
@@ -57,4 +57,6 @@ public class Constants {
     public static int LOWER_OVERLAY() {
         return LOWER_OVERLAY;
     }
+
+
 }

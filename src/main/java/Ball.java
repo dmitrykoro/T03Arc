@@ -52,15 +52,17 @@ public class Ball {
                 ballDirection = Direction.UP_R;
                 break;
             }*/
-            //Plank plank = new Plank();
+
             if (y + Constants.BALL_RADIUS() >= Constants.WINDOW_HEIGHT() - 100 &&
-                    x >= plank.getX() && x <= plank.getX() + Constants.PLANK_WIDTH() &&
+                    y + Constants.BALL_RADIUS() <= Constants.WINDOW_HEIGHT() - 100 + Constants.PLANK_HEIGHT() &&
+                    x >= plank.getX() - 10 && x <= plank.getX() + Constants.PLANK_WIDTH() + 10 &&
                     ballDirection == Direction.DWN_R) {
                 ballDirection = Direction.UP_R;
                 break;
             }
             if (y + Constants.BALL_RADIUS() >= Constants.WINDOW_HEIGHT() - 100 &&
-                    x >= plank.getX() && x <= plank.getX() + Constants.PLANK_WIDTH() &&
+                    y + Constants.BALL_RADIUS() <= Constants.WINDOW_HEIGHT() - 100 + Constants.PLANK_HEIGHT() &&
+                    x >= plank.getX() - 10 && x <= plank.getX() + Constants.PLANK_WIDTH() + 10 &&
                     ballDirection == Direction.DWN_L) {
                 ballDirection = Direction.UP_L;
                 break;
