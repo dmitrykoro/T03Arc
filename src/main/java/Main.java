@@ -17,6 +17,8 @@ public class Main extends JPanel implements ActionListener{
 
     Ball ball = new Ball();
 
+    Blocks blocks = new Blocks();
+
     public Main(JFrame frame) {
         timer.start();
         frame.addKeyListener(new KeyAdapter() {
@@ -43,6 +45,20 @@ public class Main extends JPanel implements ActionListener{
         g.drawLine(20, Constants.WINDOW_HEIGHT() - 55, 20, 20);
         g.fillRect(plank.getX(), frame.getHeight() - 100, Constants.PLANK_WIDTH(), Constants.PLANK_HEIGHT());
         g.fillOval(ball.getX(), ball.getY(), Constants.BALL_RADIUS(), Constants.BALL_RADIUS());
+
+        int blockWidth = (Constants.WINDOW_WIDTH() - Constants.LEFT_OVERLAY() - 30
+                - (blocks.getH() + 1) * Constants.DELAY_BTW_BLOCKS()) / Constants.NUM_OF_BLOCKS_H();
+
+       // int blockWidth = 40;
+
+        for(int i = Constants.LEFT_OVERLAY() + Constants.DELAY_BTW_BLOCKS(); i < blocks.getV() * (blockWidth + Constants.DELAY_BTW_BLOCKS()); i += (blockWidth + Constants.DELAY_BTW_BLOCKS())) {
+            for(int j = Constants.LEFT_OVERLAY() + Constants.DELAY_BTW_BLOCKS(); j < Constants.RIGHT_OVERLAY() - Constants.DELAY_BTW_BLOCKS(); j += (blockWidth + Constants.DELAY_BTW_BLOCKS())) {
+                g.setColor(Color.WHITE);
+                g.fillRect(j, i, blockWidth, blockWidth);
+                //g.fillRect(i, j, 40, 40);
+            }
+        }
+
     }
 
     public void actionPerformed(ActionEvent e) {

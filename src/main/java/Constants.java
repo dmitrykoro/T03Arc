@@ -13,6 +13,10 @@ public class Constants {
     private static int LEFT_OVERLAY = 20;
     private static int UPPER_OVERLAY = 20;
     private static int LOWER_OVERLAY = WINDOW_HEIGHT - 55;
+    private static int NUM_OF_BLOCKS_H = 20;
+    private static int NUM_OF_BLOCKS_V = 3;
+    private static int DELAY_BTW_BLOCKS = 10;
+
 
     public static int WINDOW_WIDTH() {
         return WINDOW_WIDTH;
@@ -58,5 +62,16 @@ public class Constants {
         return LOWER_OVERLAY;
     }
 
+    public static int NUM_OF_BLOCKS_H() {
+        return NUM_OF_BLOCKS_H;
+    }
+
+    public static int NUM_OF_BLOCKS_V() {
+        return NUM_OF_BLOCKS_V;
+    }
+
+    public static int DELAY_BTW_BLOCKS() {
+        return DELAY_BTW_BLOCKS;
+    }
 
 }

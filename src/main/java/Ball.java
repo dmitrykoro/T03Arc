@@ -12,6 +12,7 @@ public class Ball {
     public void move(Plank plank) {
         while (true) {
 
+            //we're hitting the right corner
             if (x + Constants.BALL_RADIUS() >= Constants.RIGHT_OVERLAY() &&
                     ballDirection == Direction.UP_R) {
                 ballDirection = Direction.UP_L;
@@ -23,6 +24,7 @@ public class Ball {
                 break;
             }
 
+            //we're hitting the upper corner
             if (y <= Constants.UPPER_OVERLAY() &&
                     ballDirection == Direction.UP_R) {
                 ballDirection = Direction.DWN_R;
@@ -33,6 +35,7 @@ public class Ball {
                 break;
             }
 
+            //we're hitting the left corner
             if (x <= Constants.LEFT_OVERLAY() &&
                     ballDirection == Direction.DWN_L) {
                 ballDirection = Direction.DWN_R;
@@ -43,34 +46,26 @@ public class Ball {
                 break;
             }
 
-            /*if (y + Constants.BALL_RADIUS() >= Constants.LOWER_OVERLAY() &&
-                    ballDirection == Direction.DWN_L) {
-                ballDirection = Direction.UP_L;
-                break;
-            } else if (y + Constants.BALL_RADIUS() >= Constants.LOWER_OVERLAY() &&
-                    ballDirection == Direction.DWN_R) {
-                ballDirection = Direction.UP_R;
-                break;
-            }*/
-
+            //we're hitting the plank
             if (y + Constants.BALL_RADIUS() >= Constants.WINDOW_HEIGHT() - 100 &&
                     y + Constants.BALL_RADIUS() <= Constants.WINDOW_HEIGHT() - 100 + Constants.PLANK_HEIGHT() &&
-                    x >= plank.getX() - 10 && x <= plank.getX() + Constants.PLANK_WIDTH() + 10 &&
+                    x >= plank.getX() - Constants.BALL_RADIUS() / 2 &&
+                    x <= plank.getX() + Constants.PLANK_WIDTH() + Constants.BALL_RADIUS() / 2 &&
                     ballDirection == Direction.DWN_R) {
                 ballDirection = Direction.UP_R;
                 break;
             }
             if (y + Constants.BALL_RADIUS() >= Constants.WINDOW_HEIGHT() - 100 &&
                     y + Constants.BALL_RADIUS() <= Constants.WINDOW_HEIGHT() - 100 + Constants.PLANK_HEIGHT() &&
-                    x >= plank.getX() - 10 && x <= plank.getX() + Constants.PLANK_WIDTH() + 10 &&
+                    x >= plank.getX() - Constants.BALL_RADIUS() / 2 &&
+                    x <= plank.getX() + Constants.PLANK_WIDTH() + Constants.BALL_RADIUS() / 2 &&
                     ballDirection == Direction.DWN_L) {
                 ballDirection = Direction.UP_L;
                 break;
             }
             break;
         }
-        /*System.out.println(x);
-        System.out.println(y);*/
+
         switch (ballDirection) {
             case UP_R:
                 x += Constants.BALL_SPEED();
