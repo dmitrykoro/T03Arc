@@ -3,19 +3,19 @@
 public class Constants {
 
     private static int WINDOW_WIDTH = 1024;
-    private static int WINDOW_HEIGHT = 600;
+    private static int WINDOW_HEIGHT = 1024;
     private static int PLANK_SPEED = 13;
     private static int PLANK_WIDTH = 100;
     private static int PLANK_HEIGHT = 5;
-    private static int BALL_RADIUS = 20;
-    private static int BALL_SPEED = 6;
+    private static int BALL_RADIUS = 15;
+    private static int BALL_SPEED = 4;
     private static int RIGHT_OVERLAY = WINDOW_WIDTH - 35;
     private static int LEFT_OVERLAY = 20;
     private static int UPPER_OVERLAY = 20;
     private static int LOWER_OVERLAY = WINDOW_HEIGHT - 55;
-    private static int NUM_OF_BLOCKS_H = 20;
-    private static int NUM_OF_BLOCKS_V = 3;
-    private static int DELAY_BTW_BLOCKS = 10;
+    private static int NUM_OF_BLOCKS_H = 15;
+    private static int NUM_OF_BLOCKS_V = 10;
+    private static int DELAY_BTW_BLOCKS = 30;
 
 
     public static int WINDOW_WIDTH() {

@@ -2,12 +2,6 @@ import java.awt.event.KeyEvent;
 
 public class Plank {
 
-   /* private int WINDOW_WIDTH = 1024;
-    private int WINDOW_HEIGHT = 600;
-    private int PLANK_SPEED = 8;
-    private int PLANK_WIDTH = 50;
-    private int PLANK_HEIGHT = 5;*/
-
     private int x = Constants.WINDOW_WIDTH() / 2 - Constants.PLANK_WIDTH();
 
     enum Direction {LEFT, RIGHT, NONE}
