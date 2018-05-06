@@ -35,7 +35,7 @@ public class Main extends JPanel implements ActionListener{
                 plank.keyReleased(e);
             }
         });
-        this.frame = frame; 
+        this.frame = frame;
     }
 
     public void paint(Graphics g) {
@@ -43,10 +43,9 @@ public class Main extends JPanel implements ActionListener{
         g.drawImage(img, 0, 0, frame.getWidth(), frame.getHeight(), null);
         g.setColor(Color.WHITE);
         g.drawLine(20, 20, Constants.WINDOW_WIDTH() - 35, 20);
-        g.drawLine(Constants.WINDOW_WIDTH() - 35, 20, Constants.WINDOW_WIDTH() - 35, Constants.WINDOW_HEIGHT() - 55);
-        g.drawLine(Constants.WINDOW_WIDTH() - 35, Constants.WINDOW_HEIGHT() - 55, 20, Constants.WINDOW_HEIGHT() - 55);
-        g.drawLine(20, Constants.WINDOW_HEIGHT() - 55, 20, 20);
-        g.fillRect(plank.getX(), frame.getHeight() - 100, Constants.PLANK_WIDTH(), Constants.PLANK_HEIGHT());
+        g.drawLine(Constants.WINDOW_WIDTH() - 35, 20, Constants.WINDOW_WIDTH() - 35, Constants.WINDOW_HEIGHT());
+        g.drawLine(20, Constants.WINDOW_HEIGHT(), 20, 20);
+        g.fillRect(plank.getX(), plank.getY(), Constants.PLANK_WIDTH(), Constants.PLANK_HEIGHT());
         g.fillOval(ball.getX(), ball.getY(), Constants.BALL_RADIUS(), Constants.BALL_RADIUS());
 
         int blockWidth = (Constants.WINDOW_WIDTH() - Constants.LEFT_OVERLAY() - 30

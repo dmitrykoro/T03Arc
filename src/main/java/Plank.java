@@ -3,6 +3,7 @@ import java.awt.event.KeyEvent;
 public class Plank {
 
     private int x = Constants.WINDOW_WIDTH() / 2 - Constants.PLANK_WIDTH();
+    private int y = Constants.WINDOW_HEIGHT() - 100;
 
     enum Direction {LEFT, RIGHT, NONE}
 
@@ -46,6 +47,10 @@ public class Plank {
 
     public int getX() {
         return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getSpeed() {

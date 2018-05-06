@@ -38,8 +38,8 @@ public class Ball {
             }
 
             //we're hitting the plank
-            if (y + Constants.BALL_RADIUS() >= Constants.WINDOW_HEIGHT() - 100 &&
-                    y + Constants.BALL_RADIUS() <= Constants.WINDOW_HEIGHT() - 100 + Constants.PLANK_HEIGHT() &&
+            if (y + Constants.BALL_RADIUS() >= plank.getY() &&
+                    y + Constants.BALL_RADIUS() <= plank.getY() + Constants.PLANK_HEIGHT() &&
                     x >= plank.getX() - Constants.BALL_RADIUS() &&
                     x <= plank.getX() + Constants.PLANK_WIDTH() + Constants.BALL_RADIUS()) {
                 if (ballDirection == Direction.DWN_R) {
@@ -53,28 +53,19 @@ public class Ball {
             int centerX = x + Constants.BALL_RADIUS() / 2;
             int centerY = y + Constants.BALL_RADIUS() / 2;
 
-            System.out.println("x1 " + blockX);
-            System.out.println("y1 " + (blockY + blockWidth));
-            System.out.println("x2 " + (blockX + blockWidth));
-            System.out.println("y2 " + blockY);
-            System.out.println("ball x " + centerX);
-            System.out.println("ball y " + centerY);
-
-
             if (ballDirection == Direction.UP_R) {
-                if ((centerX - blockX) * blockWidth - (centerY - blockY - blockWidth) * blockWidth  < 0) {
+                if ((centerX - blockX) * (-blockWidth) - (centerY - blockY - blockWidth) * blockWidth  > 0) {
                     ballDirection = Direction.UP_L;
-                    System.out.println((centerX - blockX) * blockWidth - (centerY - blockY - blockWidth) * blockWidth);
                 }
-                else if ((centerX - blockX) * blockWidth - (centerY - blockY - blockWidth) * blockWidth  > 0) {
+                else {
                     ballDirection = Direction.DWN_R;
                 }
             }
             else if (ballDirection == Direction.DWN_L) {
-                if ((centerX - blockX) * blockWidth - (centerY - blockY - blockWidth) * blockWidth  < 0) {
+                if ((centerX - blockX) * (-blockWidth) - (centerY - blockY - blockWidth) * blockWidth  > 0) {
                     ballDirection = Direction.UP_L;
                 }
-                else if ((centerX - blockX) * blockWidth - (centerY - blockY - blockWidth) * blockWidth > 0){
+                else {
                     ballDirection = Direction.DWN_R;
                 }
             }
@@ -87,7 +78,7 @@ public class Ball {
                 }
             }
             else if (ballDirection == Direction.DWN_R) {
-                if ((centerX - blockX) * blockWidth - (centerY - blockY) * blockWidth < 0) {
+                if ((centerX - blockX) * blockWidth - (centerY - blockY) * blockWidth > 0) {
                     ballDirection = Direction.UP_R;
                 }
                 else {
