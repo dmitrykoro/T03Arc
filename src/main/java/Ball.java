@@ -37,6 +37,15 @@ public class Ball {
                 ballDirection = Direction.UP_R;
             }
 
+            //if we want to reflect from lower corner
+            /*if (y + Constants.BALL_RADIUS() >= Constants.LOWER_OVERLAY() &&
+                    ballDirection == Direction.DWN_L) {
+                ballDirection = Direction.UP_L;
+            } else if (y + Constants.BALL_RADIUS() >= Constants.LOWER_OVERLAY() &&
+                    ballDirection == Direction.DWN_R) {
+                ballDirection = Direction.UP_R;
+            }*/
+
             //we're hitting the plank
             if (y + Constants.BALL_RADIUS() >= plank.getY() &&
                     y + Constants.BALL_RADIUS() <= plank.getY() + Constants.PLANK_HEIGHT() &&
