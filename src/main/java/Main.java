@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 
 public class Main extends JPanel implements ActionListener{
 
-    Image img = new ImageIcon("Background.jpg").getImage();
+    URL url = getClass().getResource("Background.jpg");
+    Image img = new ImageIcon(url).getImage();
 
     Timer timer = new Timer(10, this);
 
@@ -55,6 +57,7 @@ public class Main extends JPanel implements ActionListener{
         int addition = 0;
         boolean weNeedShift = true;
 
+        paintSmth(g);
         //draw blocks
         int currentBlockNumber = 0;
         for (int i = Constants.LEFT_OVERLAY() + Constants.DELAY_BTW_BLOCKS();
@@ -85,6 +88,11 @@ public class Main extends JPanel implements ActionListener{
                 addition = 0;
             }
         }
+    }
+
+    public void paintSmth(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.drawLine(100, 100, 500, 500);
     }
 
     public void actionPerformed(ActionEvent e) {
