@@ -10,14 +10,14 @@ public class Plank {
     private Direction plankDirection = Direction.NONE;
 
     public void move() {
-        switch(plankDirection) {
+        switch (plankDirection) {
             case LEFT:
                 if (x >= Constants.LEFT_OVERLAY() + 3) {
                     x -= Constants.PLANK_SPEED();
                 }
                 break;
             case RIGHT:
-                if (x + Constants.PLANK_WIDTH() + 6  <= Constants.RIGHT_OVERLAY()) {
+                if (x + Constants.PLANK_WIDTH() + 6 <= Constants.RIGHT_OVERLAY()) {
                     x += Constants.PLANK_SPEED();
                 }
                 break;
@@ -30,16 +30,14 @@ public class Plank {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == 65 || key == 37) {
+        if (key == 65 || key == 37) {
             plankDirection = Direction.LEFT;
-        }
-        else if(key == 68 || key == 39) {
+        } else if (key == 68 || key == 39) {
             plankDirection = Direction.RIGHT;
-        }
-        else {
+        } else {
             plankDirection = Direction.NONE;
         }
-        System.out.println(key);
+        //System.out.println(key);
     }
 
     public void keyReleased(KeyEvent e) {

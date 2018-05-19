@@ -1,5 +1,4 @@
 
-
 public class Constants {
 
     /*private static int WINDOW_WIDTH = 1024;
@@ -18,7 +17,7 @@ public class Constants {
     private static int DELAY_BTW_BLOCKS = 80;*/
 
     private static int WINDOW_WIDTH = 1280;
-    private static int WINDOW_HEIGHT = 600;
+    private static int WINDOW_HEIGHT = 800;
     private static int PLANK_SPEED = 13;
     private static int PLANK_WIDTH = 100;
     private static int PLANK_HEIGHT = 5;

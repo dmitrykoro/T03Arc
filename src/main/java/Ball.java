@@ -6,6 +6,7 @@ public class Ball {
     private int y = Constants.WINDOW_HEIGHT() - 100;
 
     enum Direction {UP_L, UP_R, DWN_L, DWN_R}
+
     private Direction ballDirection = Direction.UP_R;
 
     public void move(Plank plank, Boolean hittedBlock, int blockX, int blockY, int blockWidth) {
@@ -57,40 +58,32 @@ public class Ball {
                     ballDirection = Direction.UP_L;
                 }
             }
-        }
-        else {
+        } else {
             int centerX = x + Constants.BALL_RADIUS() / 2;
             int centerY = y + Constants.BALL_RADIUS() / 2;
 
             if (ballDirection == Direction.UP_R) {
-                if ((centerX - blockX) * (-blockWidth) - (centerY - blockY - blockWidth) * blockWidth  > 0) {
+                if ((centerX - blockX) * (-blockWidth) - (centerY - blockY - blockWidth) * blockWidth > 0) {
                     ballDirection = Direction.UP_L;
-                }
-                else {
+                } else {
                     ballDirection = Direction.DWN_R;
                 }
-            }
-            else if (ballDirection == Direction.DWN_L) {
-                if ((centerX - blockX) * (-blockWidth) - (centerY - blockY - blockWidth) * blockWidth  > 0) {
+            } else if (ballDirection == Direction.DWN_L) {
+                if ((centerX - blockX) * (-blockWidth) - (centerY - blockY - blockWidth) * blockWidth > 0) {
                     ballDirection = Direction.UP_L;
-                }
-                else {
+                } else {
                     ballDirection = Direction.DWN_R;
                 }
-            }
-            else if (ballDirection == Direction.UP_L) {
+            } else if (ballDirection == Direction.UP_L) {
                 if ((centerX - blockX) * blockWidth - (centerY - blockY) * blockWidth > 0) {
                     ballDirection = Direction.UP_R;
-                }
-                else {
+                } else {
                     ballDirection = Direction.DWN_L;
                 }
-            }
-            else if (ballDirection == Direction.DWN_R) {
+            } else if (ballDirection == Direction.DWN_R) {
                 if ((centerX - blockX) * blockWidth - (centerY - blockY) * blockWidth > 0) {
                     ballDirection = Direction.UP_R;
-                }
-                else {
+                } else {
                     ballDirection = Direction.DWN_L;
                 }
             }
