@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,8 +9,13 @@ public class Constants {
 
     private static String text;
 
-    public static final int WINDOW_WIDTH = 1280;
-    public static final int WINDOW_HEIGHT = 600;
+    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private static int width = (int)screenSize.getWidth();
+    private static int height = (int)screenSize.getHeight();
+
+
+    public static final int WINDOW_WIDTH = width;
+    public static final int WINDOW_HEIGHT = height;
     public static final int PLANK_SPEED = 15;
     public static final int PLANK_WIDTH = 100;
     public static final int PLANK_HEIGHT = 5;
@@ -18,9 +25,9 @@ public class Constants {
     public static final int LEFT_OVERLAY = 20;
     public static final int UPPER_OVERLAY = 20;
     public static final int LOWER_OVERLAY = WINDOW_HEIGHT - 55;
-    public static final int NUM_OF_BLOCKS_H = 15;
-    public static final int NUM_OF_BLOCKS_V = 5;
-    public static final int DELAY_BTW_BLOCKS = 30;
+    public static final int NUM_OF_BLOCKS_H = 25;
+    public static final int NUM_OF_BLOCKS_V = 8;
+    public static final int DELAY_BTW_BLOCKS = 40;
     public static final int NUM_OF_LIVES = 2;
 
     public void initialSettings() {

@@ -57,6 +57,9 @@ public class Global {
         if (e.getKeyCode() == 10 && status == GAME_STATUS.notStarted) {
             status = GAME_STATUS.running;
         }
+        if (e.getKeyCode() == 89) {
+            System.exit(1);
+        }
     }
 
     public void setStatusFailed() {

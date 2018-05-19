@@ -12,12 +12,12 @@ public class Plank {
     public void move() {
         switch (plankDirection) {
             case LEFT:
-                if (x >= Constants.LEFT_OVERLAY + Constants.PLANK_SPEED / 2) {
+                if (x >= Constants.LEFT_OVERLAY) {
                     x -= Constants.PLANK_SPEED;
                 }
                 break;
             case RIGHT:
-                if (x + Constants.PLANK_WIDTH < Constants.RIGHT_OVERLAY) {
+                if (x + Constants.PLANK_WIDTH <+ Constants.RIGHT_OVERLAY) {
                     x += Constants.PLANK_SPEED;
                 }
                 break;

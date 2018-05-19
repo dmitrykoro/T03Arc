@@ -101,6 +101,9 @@ public class Main extends JPanel implements ActionListener {
         g.setFont(pauseFont);
         g.drawString("Press ESC to resume",
                 util.getXforTextInCenter("Press ESC to resume", pauseFont, g), Constants.WINDOW_HEIGHT / 2);
+        g.setFont(infoFont);
+        g.drawString("Press Y for exit",
+                util.getXforTextInCenter("Press Y for exit", infoFont, g), Constants.WINDOW_HEIGHT / 2 + 50);
     }
 
     private void drawFailed(Graphics g) {
@@ -115,6 +118,8 @@ public class Main extends JPanel implements ActionListener {
         g.setFont(infoFont);
         g.drawString("Press R for restart",
                 util.getXforTextInCenter("Press R for restart", infoFont, g), Constants.WINDOW_HEIGHT / 2 + 100);
+        g.drawString("Press Y for exit",
+                util.getXforTextInCenter("Press Y for exit", infoFont, g), Constants.WINDOW_HEIGHT / 2 + 150);
     }
 
     private void drawHello(Graphics g) {
@@ -124,13 +129,16 @@ public class Main extends JPanel implements ActionListener {
         g.setFont(pauseFont);
         g.drawString("Press ENTER to begin",
                 util.getXforTextInCenter("Press ENTER to begin", pauseFont, g), Constants.WINDOW_HEIGHT / 2);
+        g.setFont(infoFont);
+        g.drawString("Press Y for exit",
+                util.getXforTextInCenter("Press Y for exit", infoFont, g), Constants.WINDOW_HEIGHT / 2 + 50);
     }
 
     private void drawWindow(Graphics g) {
         g.drawImage(img, 0, 0, frame.getWidth(), frame.getHeight(), null);
         g.setColor(Color.WHITE);
-        g.drawLine(20, 20, Constants.WINDOW_WIDTH - 35, 20);
-        g.drawLine(Constants.WINDOW_WIDTH - 35, 20, Constants.WINDOW_WIDTH - 35, Constants.WINDOW_HEIGHT);
+        g.drawLine(20, 20, Constants.WINDOW_WIDTH - 20, 20);
+        g.drawLine(Constants.WINDOW_WIDTH - 20, 20, Constants.WINDOW_WIDTH - 20, Constants.WINDOW_HEIGHT);
         g.drawLine(20, Constants.WINDOW_HEIGHT, 20, 20);
         g.fillRect(plank.getX(), plank.getY(), Constants.PLANK_WIDTH, Constants.PLANK_HEIGHT);
         g.fillOval(ball.getX(), ball.getY(), Constants.BALL_RADIUS, Constants.BALL_RADIUS);
@@ -197,4 +205,13 @@ public class Main extends JPanel implements ActionListener {
             ball.resetBallPosition();
         }
     }
+
+    public int getWidth() {
+       return frame.getWidth();
+    }
+
+    public int getHeight() {
+        return frame.getHeight();
+    }
+
 }
