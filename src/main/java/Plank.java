@@ -37,7 +37,7 @@ public class Plank {
         } else {
             plankDirection = Direction.NONE;
         }
-        //System.out.println(key);
+        System.out.println(key);
     }
 
     public void keyReleased(KeyEvent e) {

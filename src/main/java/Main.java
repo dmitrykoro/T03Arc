@@ -26,12 +26,14 @@ public class Main extends JPanel implements ActionListener {
     Util util = new Util();
 
     private Color pauseScreen = new Color(255, 255, 255, 230);
+    private Color failedScreen = new Color(255, 0, 0, 255);
 
     private int blockWidth = (Constants.WINDOW_WIDTH() - Constants.LEFT_OVERLAY() - 30
             - (blocks.getH() + 1) * Constants.DELAY_BTW_BLOCKS()) / Constants.NUM_OF_BLOCKS_H();
     private int blockShift = (blockWidth + Constants.DELAY_BTW_BLOCKS()) / 2;
 
     private Font pauseFont = new Font("Impact", Font.PLAIN, Constants.WINDOW_WIDTH() / 40);
+    private Font infoFont = new Font("Impact", Font.PLAIN, 16);
 
     private boolean[] deadBlocks = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
 
@@ -55,11 +57,36 @@ public class Main extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g) {
-            drawWindow(g);
-            drawBlocks(g);
-            if (global.getStatus() == Global.GAME_STATUS.pause) {
-                drawPause(g);
-            }
+
+        drawWindow(g);
+        drawBlocks(g);
+
+        if (global.getStatus() == Global.GAME_STATUS.pause) {
+            drawPause(g);
+        }
+
+        drawScore(g);
+        drawLives(g);
+
+        if (global.getStatus() == Global.GAME_STATUS.failed) {
+            drawFailed(g);
+        }
+
+        if (global.getStatus() == Global.GAME_STATUS.notStarted) {
+            drawHello(g);
+        }
+    }
+
+    private void drawScore(Graphics g) {
+        g.setFont(infoFont);
+        g.setColor(Color.PINK);
+        g.drawString(String.valueOf(global.getScore()), 20, 17);
+    }
+
+    private void drawLives(Graphics g) {
+        g.setFont(infoFont);
+        g.setColor(Color.PINK);
+        g.drawString(String.valueOf(global.getLives()), Constants.WINDOW_WIDTH() - 43, 17);
     }
 
     private void drawPause(Graphics g) {
@@ -69,6 +96,29 @@ public class Main extends JPanel implements ActionListener {
         g.setFont(pauseFont);
         g.drawString("Press ESC to resume",
                 util.getXforTextInCenter("Press ESC to resume", pauseFont, g), Constants.WINDOW_HEIGHT() / 2);
+    }
+
+    private void drawFailed(Graphics g) {
+        g.setColor(failedScreen);
+        g.fillRect(0, 0, Constants.WINDOW_WIDTH(), Constants.WINDOW_HEIGHT());
+        g.setColor(Color.WHITE);
+        g.setFont(pauseFont);
+        g.drawString("Game over. Your score:",
+                util.getXforTextInCenter("Game over. Your score:", pauseFont, g), Constants.WINDOW_HEIGHT() / 2);
+        g.drawString(String.valueOf(global.getScore()),
+                util.getXforTextInCenter(String.valueOf(global.getScore()), pauseFont, g), Constants.WINDOW_HEIGHT() / 2 + 50);
+        g.setFont(infoFont);
+        g.drawString("Press R for restart",
+                util.getXforTextInCenter("Press R for restart", infoFont, g), Constants.WINDOW_HEIGHT() / 2 + 100);
+    }
+
+    private void drawHello(Graphics g) {
+        g.setColor(pauseScreen);
+        g.fillRect(0, 0, Constants.WINDOW_WIDTH(), Constants.WINDOW_HEIGHT());
+        g.setColor(Color.black);
+        g.setFont(pauseFont);
+        g.drawString("Press ENTER to begin",
+                util.getXforTextInCenter("Press ENTER to begin", pauseFont, g), Constants.WINDOW_HEIGHT() / 2);
     }
 
     private void drawWindow(Graphics g) {
@@ -99,6 +149,7 @@ public class Main extends JPanel implements ActionListener {
                     if (blocks.isBallHitting(ball, j, i, blockWidth)) {
                         deadBlocks[currentBlockNumber] = true;
                         ball.move(plank, true, j, i, blockWidth);
+                        global.increaseScore();
                     } else {
                         g.fillRect(j, i, blockWidth, blockWidth);
                     }
@@ -109,8 +160,7 @@ public class Main extends JPanel implements ActionListener {
             if (weNeedShift) {
                 weNeedShift = false;
                 addition = blockShift;
-            }
-            else {
+            } else {
                 weNeedShift = true;
                 addition = 0;
             }
@@ -122,6 +172,17 @@ public class Main extends JPanel implements ActionListener {
         if (global.getStatus() == Global.GAME_STATUS.running) {
             plank.move();
             ball.move(plank, false, 0, 0, 0);
+        }
+        if (ball.ballLose()) {
+            if (global.getLives() == 0) {
+                global.setStatusFailed();
+            }
+            else {
+                global.decreaseLives();
+            }
+            ball.resetBallPosition();
+            global.resetLives();
+            deadBlocks = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
         }
 
     }

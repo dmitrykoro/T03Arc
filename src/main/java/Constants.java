@@ -30,6 +30,7 @@ public class Constants {
     private static int NUM_OF_BLOCKS_H = 15;
     private static int NUM_OF_BLOCKS_V = 5;
     private static int DELAY_BTW_BLOCKS = 30;
+    public static final int NUM_OF_LIVES = 0;
     //public static final int
 
 
