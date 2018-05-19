@@ -2,8 +2,8 @@ import java.awt.event.KeyEvent;
 
 public class Plank {
 
-    private int x = Constants.WINDOW_WIDTH() / 2 - Constants.PLANK_WIDTH();
-    private int y = Constants.WINDOW_HEIGHT() - 100;
+    private int x = Constants.WINDOW_WIDTH / 2 /*- Constants.PLANK_WIDTH*/;
+    private int y = Constants.WINDOW_HEIGHT - 100;
 
     enum Direction {LEFT, RIGHT, NONE}
 
@@ -12,13 +12,13 @@ public class Plank {
     public void move() {
         switch (plankDirection) {
             case LEFT:
-                if (x >= Constants.LEFT_OVERLAY() + 3) {
-                    x -= Constants.PLANK_SPEED();
+                if (x >= Constants.LEFT_OVERLAY + Constants.PLANK_SPEED / 2) {
+                    x -= Constants.PLANK_SPEED;
                 }
                 break;
             case RIGHT:
-                if (x + Constants.PLANK_WIDTH() + 6 <= Constants.RIGHT_OVERLAY()) {
-                    x += Constants.PLANK_SPEED();
+                if (x + Constants.PLANK_WIDTH < Constants.RIGHT_OVERLAY) {
+                    x += Constants.PLANK_SPEED;
                 }
                 break;
             case NONE:
@@ -37,7 +37,6 @@ public class Plank {
         } else {
             plankDirection = Direction.NONE;
         }
-        System.out.println(key);
     }
 
     public void keyReleased(KeyEvent e) {
@@ -53,6 +52,11 @@ public class Plank {
     }
 
     public int getSpeed() {
-        return Constants.PLANK_SPEED();
+        return Constants.PLANK_SPEED;
+    }
+
+    public void resetPlankPosition() {
+        x = Constants.WINDOW_WIDTH / 2;
+        y = Constants.WINDOW_HEIGHT - 100;
     }
 }

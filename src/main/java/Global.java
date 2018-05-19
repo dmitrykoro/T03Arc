@@ -41,12 +41,11 @@ public class Global {
     }
 
     public void checkKey(KeyEvent e) {
-        if (e.getKeyCode() == 27) {
+        if (e.getKeyCode() == 27 && status != GAME_STATUS.failed) {
             if (weAreInPause) {
                 status = GAME_STATUS.running;
                 weAreInPause = false;
-            }
-            else {
+            } else {
                 status = GAME_STATUS.pause;
                 weAreInPause = true;
             }
