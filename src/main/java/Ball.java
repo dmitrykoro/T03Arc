@@ -49,9 +49,8 @@ public class Ball {
 
             //we're hitting the plank
             if (y + Constants.BALL_RADIUS >= plank.getY() &&
-                    y + Constants.BALL_RADIUS <= plank.getY() + Constants.PLANK_HEIGHT &&
                     x >= plank.getX() - Constants.BALL_RADIUS &&
-                    x <= plank.getX() + Constants.PLANK_WIDTH + Constants.BALL_RADIUS) {
+                    x <= plank.getX() + Constants.PLANK_WIDTH() + Constants.BALL_RADIUS) {
                 if (ballDirection == Direction.DWN_R) {
                     ballDirection = Direction.UP_R;
                 } else if (ballDirection == Direction.DWN_L) {
@@ -91,20 +90,20 @@ public class Ball {
 
         switch (ballDirection) {
             case UP_R:
-                x += Constants.BALL_SPEED;
-                y -= Constants.BALL_SPEED;
+                x += Constants.BALL_SPEED();
+                y -= Constants.BALL_SPEED();
                 break;
             case UP_L:
-                x -= Constants.BALL_SPEED;
-                y -= Constants.BALL_SPEED;
+                x -= Constants.BALL_SPEED();
+                y -= Constants.BALL_SPEED();
                 break;
             case DWN_L:
-                x -= Constants.BALL_SPEED;
-                y += Constants.BALL_SPEED;
+                x -= Constants.BALL_SPEED();
+                y += Constants.BALL_SPEED();
                 break;
             case DWN_R:
-                x += Constants.BALL_SPEED;
-                y += Constants.BALL_SPEED;
+                x += Constants.BALL_SPEED();
+                y += Constants.BALL_SPEED();
         }
     }
 

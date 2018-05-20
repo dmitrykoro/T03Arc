@@ -13,12 +13,12 @@ public class Plank {
         switch (plankDirection) {
             case LEFT:
                 if (x >= Constants.LEFT_OVERLAY) {
-                    x -= Constants.PLANK_SPEED;
+                    x -= Constants.PLANK_SPEED();
                 }
                 break;
             case RIGHT:
-                if (x + Constants.PLANK_WIDTH <+ Constants.RIGHT_OVERLAY) {
-                    x += Constants.PLANK_SPEED;
+                if (x + Constants.PLANK_WIDTH() <+ Constants.RIGHT_OVERLAY) {
+                    x += Constants.PLANK_SPEED();
                 }
                 break;
             case NONE:
@@ -52,7 +52,7 @@ public class Plank {
     }
 
     public int getSpeed() {
-        return Constants.PLANK_SPEED;
+        return Constants.PLANK_SPEED();
     }
 
     public void resetPlankPosition() {

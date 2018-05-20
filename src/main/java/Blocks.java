@@ -3,8 +3,8 @@ import java.awt.geom.Rectangle2D;
 
 public class Blocks {
 
-    private int h = Constants.NUM_OF_BLOCKS_H;
-    private int v = Constants.NUM_OF_BLOCKS_V;
+    private int h = Constants.NUM_OF_BLOCKS_H();
+    private int v = Constants.NUM_OF_BLOCKS_V();
 
     public Boolean isBallHitting(Ball ball, int blockX, int blockY, int blockWidth) {
         Rectangle2D currentBlock = new Rectangle(blockX, blockY, blockWidth, blockWidth);
