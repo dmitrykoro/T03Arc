@@ -66,7 +66,6 @@ public class Main extends JPanel implements ActionListener {
     }
 
 
-
     public void paint(Graphics g) {
 
         drawWindow(g);
@@ -182,56 +181,36 @@ public class Main extends JPanel implements ActionListener {
 
         //draw blocks
         int currentBlockNumber = 0;
-        try {
-            for (int i = Constants.LEFT_OVERLAY + Constants.DELAY_BTW_BLOCKS();
-                 i < blocks.getV() * (blockWidth + Constants.DELAY_BTW_BLOCKS());
-                 i += (blockWidth + Constants.DELAY_BTW_BLOCKS())) {
+        int currentCount = 0;
+        for (int i = Constants.LEFT_OVERLAY + Constants.DELAY_BTW_BLOCKS();
+             i < blocks.getV() * (blockWidth + Constants.DELAY_BTW_BLOCKS());
+             i += (blockWidth + Constants.DELAY_BTW_BLOCKS())) {
 
-
-                for (int j = Constants.LEFT_OVERLAY + Constants.DELAY_BTW_BLOCKS() + addition;
-                     j < Constants.RIGHT_OVERLAY - Constants.DELAY_BTW_BLOCKS() - addition;
-                     j += (blockWidth + Constants.DELAY_BTW_BLOCKS())) {
-                    if (!deadBlocks[currentBlockNumber]) {
-                        if (blocks.isBallHitting(ball, j, i, blockWidth)) {
-                            deadBlocks[currentBlockNumber] = true;
-                            ball.move(plank, true, j, i, blockWidth);
-                            global.increaseScore();
-                        } else {
-                            g.fillRect(j, i, blockWidth, blockWidth);
-                        }
+            for (int j = Constants.LEFT_OVERLAY + Constants.DELAY_BTW_BLOCKS() + addition;
+                 j < Constants.RIGHT_OVERLAY - Constants.DELAY_BTW_BLOCKS() - addition && currentCount < Constants.NUM_OF_BLOCKS_H();
+                 j += (blockWidth + Constants.DELAY_BTW_BLOCKS())) {
+                currentCount++;
+                if (!deadBlocks[currentBlockNumber]) {
+                    if (blocks.isBallHitting(ball, j, i, blockWidth)) {
+                        deadBlocks[currentBlockNumber] = true;
+                        ball.move(plank, true, j, i, blockWidth);
+                        global.increaseScore();
+                    } else {
+                        g.fillRect(j, i, blockWidth, blockWidth);
                     }
-                    currentBlockNumber++;
                 }
+                currentBlockNumber++;
+            }
 
-                if (weNeedShift) {
-                    weNeedShift = false;
-                    addition = blockShift;
-                } else {
-                    weNeedShift = true;
-                    addition = 0;
-                }
+            currentCount = 0;
+
+            if (weNeedShift) {
+                weNeedShift = false;
+                addition = blockShift;
+            } else {
+                weNeedShift = true;
+                addition = 0;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            //PrintWriter writer = null;
-            try {
-                String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(Calendar.getInstance().getTime());
-                FileWriter write = new FileWriter("ERRORS.txt", true);
-                BufferedWriter wr = new BufferedWriter(write);
-                wr.write("//////////// Array index was out of bounds while rendering blocks at \n" + timeStamp);
-                wr.newLine();
-                wr.write("Unacceptable index: \n" + currentBlockNumber);
-                wr.newLine();
-                wr.write("Total blocks number: \n" + Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V());
-                wr.newLine();
-                wr.close();
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            } //catch (UnsupportedEncodingException e1) {
-            catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            //e1.printStackTrace();
-           // }
         }
     }
 
@@ -256,7 +235,7 @@ public class Main extends JPanel implements ActionListener {
     }
 
     public int getWidth() {
-       return frame.getWidth();
+        return frame.getWidth();
     }
 
     public int getHeight() {

@@ -14,23 +14,6 @@ public class Constants {
     private static int width = (int)screenSize.getWidth();
     private static int height = (int)screenSize.getHeight();
 
-
-    /*public static final int WINDOW_WIDTH = width;
-    public static final int WINDOW_HEIGHT = height;
-    public static final int PLANK_SPEED = settings[0];
-    public static final int PLANK_WIDTH = settings[1];
-    public static final int PLANK_HEIGHT = 5;
-    public static final int BALL_RADIUS = 15;
-    public static final int BALL_SPEED = settings[2];
-    public static final int RIGHT_OVERLAY = WINDOW_WIDTH - 35;
-    public static final int LEFT_OVERLAY = 20;
-    public static final int UPPER_OVERLAY = 20;
-    public static final int LOWER_OVERLAY = WINDOW_HEIGHT - 55;
-    public static final int NUM_OF_BLOCKS_H = settings[3];
-    public static final int NUM_OF_BLOCKS_V = settings[4];
-    public static final int DELAY_BTW_BLOCKS = settings[5];
-    public static final int NUM_OF_LIVES = settings[6];*/
-
    private static int[] settings = new int[7];
 
     public int initialSettings() {
@@ -46,8 +29,6 @@ public class Constants {
                     return -1;
                 }
             }
-            //System.out.println(Arrays.toString(settings));
-
         } catch (IOException e) {
             PrintWriter writer = null;
             try {
@@ -77,13 +58,8 @@ public class Constants {
             settings[5] = 40;
             settings[6] = 2;
         }
-        //System.out.println(settings[0]);
         return 1;
     }
-
-    //int x = settings[0];
-
-
 
     public static final int WINDOW_WIDTH = width;
     public static final int WINDOW_HEIGHT = height;
