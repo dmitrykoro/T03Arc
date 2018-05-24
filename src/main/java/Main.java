@@ -38,7 +38,7 @@ public class Main extends JPanel implements ActionListener {
 
 
     private boolean[] deadBlocks = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
-    private boolean[] comparableArr = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
+    private boolean noBlocksDraw = false;
 
 
     private int blockWidth = (Constants.WINDOW_WIDTH - Constants.LEFT_OVERLAY - 30
@@ -194,6 +194,8 @@ public class Main extends JPanel implements ActionListener {
 
     private void drawBlocks(Graphics g) {
 
+        noBlocksDraw = true;
+
         int addition = 0;
         boolean weNeedShift = true;
 
@@ -215,6 +217,7 @@ public class Main extends JPanel implements ActionListener {
                         global.increaseScore();
                     } else {
                         g.fillRect(j, i, blockWidth, blockWidth);
+                        noBlocksDraw = false;
                     }
                 }
                 currentBlockNumber++;
@@ -233,10 +236,8 @@ public class Main extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+
         repaint();
-
-        Arrays.fill(comparableArr, Boolean.TRUE);
-
         if (global.getStatus() == Global.GAME_STATUS.running) {
             plank.move();
             ball.move(plank, false, 0, 0, 0);
@@ -252,7 +253,7 @@ public class Main extends JPanel implements ActionListener {
             }
             ball.resetBallPosition(plank);
         }
-        if (Arrays.equals(deadBlocks, comparableArr)) {
+        if (noBlocksDraw) {
             global.setStatusWon();
             global.resetLives();
             deadBlocks = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
