@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 
 
@@ -33,9 +34,13 @@ public class Main extends JPanel implements ActionListener {
 
     private Color pauseScreen = new Color(255, 255, 255, 230);
     private Color failedScreen = new Color(255, 0, 0, 255);
+    private Color winScreen = new Color(0, 255, 137, 255);
 
 
     private boolean[] deadBlocks = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
+    private boolean[] comparableArr = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
+
+
     private int blockWidth = (Constants.WINDOW_WIDTH - Constants.LEFT_OVERLAY - 30
             - (blocks.getH() + 1) * Constants.DELAY_BTW_BLOCKS()) / Constants.NUM_OF_BLOCKS_H();
     private int blockShift = (blockWidth + Constants.DELAY_BTW_BLOCKS()) / 2;
@@ -44,7 +49,6 @@ public class Main extends JPanel implements ActionListener {
     private Font infoFont = new Font("Impact", Font.PLAIN, 16);
 
     public Main(JFrame frame) {
-
 
         //System.out.println(Constants.PLANK_SPEED);
         timer.start();
@@ -70,7 +74,6 @@ public class Main extends JPanel implements ActionListener {
 
         drawWindow(g);
         drawBlocks(g);
-        drawCopyright(g);
 
         if (global.getStatus() == Global.GAME_STATUS.pause) {
             drawPause(g);
@@ -78,6 +81,10 @@ public class Main extends JPanel implements ActionListener {
 
         drawScore(g);
         drawLives(g);
+
+        if (global.getStatus() == Global.GAME_STATUS.won) {
+            drawWin(g);
+        }
 
         if (global.getStatus() == Global.GAME_STATUS.failed) {
             drawFailed(g);
@@ -157,6 +164,24 @@ public class Main extends JPanel implements ActionListener {
                 util.getXforTextInCenter("Press Y for exit", infoFont, g), Constants.WINDOW_HEIGHT / 2 + 50);
     }
 
+    private void drawWin(Graphics g) {
+        g.setColor(winScreen);
+        g.fillRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        g.setColor(Color.black);
+        g.setFont(pauseFont);
+        g.drawString("You WON! Your score: ",
+                util.getXforTextInCenter("You WON! Your score: ", pauseFont, g), Constants.WINDOW_HEIGHT / 2);
+        g.drawString(String.valueOf(global.getScore()),
+                util.getXforTextInCenter(String.valueOf(global.getScore()), pauseFont, g), Constants.WINDOW_HEIGHT / 2 + 50);
+
+        g.setFont(infoFont);
+        g.drawString("Press R for restart",
+                util.getXforTextInCenter("Press R for restart", infoFont, g), Constants.WINDOW_HEIGHT / 2 + 100);
+        g.drawString("Press Y for exit",
+                util.getXforTextInCenter("Press Y for exit", infoFont, g), Constants.WINDOW_HEIGHT / 2 + 150);
+
+    }
+
     private void drawWindow(Graphics g) {
         g.drawImage(img, 0, 0, frame.getWidth(), frame.getHeight(), null);
         g.setColor(Color.WHITE);
@@ -165,13 +190,6 @@ public class Main extends JPanel implements ActionListener {
         g.drawLine(20, Constants.WINDOW_HEIGHT, 20, 20);
         g.fillRect(plank.getX(), plank.getY(), Constants.PLANK_WIDTH(), Constants.PLANK_HEIGHT);
         g.fillOval(ball.getX(), ball.getY(), Constants.BALL_RADIUS, Constants.BALL_RADIUS);
-    }
-
-    private void drawCopyright(Graphics g) {
-        g.setFont(infoFont);
-        g.setColor(pauseScreen);
-        g.drawString("© Dmitry Korobeynikov, 2018",
-                Constants.WINDOW_WIDTH - 250, Constants.WINDOW_HEIGHT - 45);
     }
 
     private void drawBlocks(Graphics g) {
@@ -217,6 +235,8 @@ public class Main extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         repaint();
 
+        Arrays.fill(comparableArr, Boolean.TRUE);
+
         if (global.getStatus() == Global.GAME_STATUS.running) {
             plank.move();
             ball.move(plank, false, 0, 0, 0);
@@ -230,7 +250,14 @@ public class Main extends JPanel implements ActionListener {
             } else {
                 global.decreaseLives();
             }
-            ball.resetBallPosition();
+            ball.resetBallPosition(plank);
+        }
+        if (Arrays.equals(deadBlocks, comparableArr)) {
+            global.setStatusWon();
+            global.resetLives();
+            deadBlocks = new boolean[Constants.NUM_OF_BLOCKS_H() * Constants.NUM_OF_BLOCKS_V()];
+            plank.resetPlankPosition();
+            ball.resetBallPosition(plank);
         }
     }
 

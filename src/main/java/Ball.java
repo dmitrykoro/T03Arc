@@ -111,8 +111,8 @@ public class Ball {
         return y + Constants.BALL_RADIUS >= Constants.LOWER_OVERLAY;
     }
 
-    public void resetBallPosition() {
-        x = Constants.WINDOW_WIDTH / 2;
+    public void resetBallPosition(Plank plank) {
+        x = plank.getX() + Constants.PLANK_WIDTH() / 2;
         y = Constants.WINDOW_HEIGHT - 100;
         ballDirection = Direction.UP_R;
     }

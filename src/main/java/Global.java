@@ -2,7 +2,7 @@ import java.awt.event.KeyEvent;
 
 public class Global {
 
-    enum GAME_STATUS {notStarted, running, pause, failed, error}
+    enum GAME_STATUS {notStarted, running, pause, failed, error, won}
 
     private GAME_STATUS status = GAME_STATUS.notStarted;
 
@@ -50,7 +50,8 @@ public class Global {
                 weAreInPause = true;
             }
         }
-        if (e.getKeyCode() == 82 && status == GAME_STATUS.failed) {
+        if (e.getKeyCode() == 82 && (status == GAME_STATUS.failed
+                || status == GAME_STATUS.won)) {
             resetScore();
             status = GAME_STATUS.running;
         }
@@ -64,6 +65,10 @@ public class Global {
 
     public void setStatusFailed() {
         status = GAME_STATUS.failed;
+    }
+
+    public void setStatusWon() {
+        status = GAME_STATUS.won;
     }
 
     public void setStatusError() {
